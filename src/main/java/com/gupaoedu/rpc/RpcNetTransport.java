@@ -2,9 +2,7 @@ package com.gupaoedu.rpc;
 
 import com.gupaoedu.vip.RpcRequest;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class RpcNetTransport {
@@ -18,8 +16,8 @@ public class RpcNetTransport {
     }
 
     public Object send(RpcRequest request) {
-        Socket socket = null;
         Object result = null;
+        Socket socket = null;
         ObjectOutputStream outputStream = null;
         ObjectInputStream inputStream = null;
 
@@ -37,20 +35,7 @@ public class RpcNetTransport {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            RpcUtil.closeResource(socket, outputStream, inputStream);
         }
         return result;
     }
