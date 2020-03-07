@@ -15,7 +15,7 @@ public class RemoteInvocationHandler implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         //请求会进入到这里
         System.out.println("come in");
         //请求数据的包装
