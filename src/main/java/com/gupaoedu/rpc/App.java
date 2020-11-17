@@ -1,6 +1,7 @@
 package com.gupaoedu.rpc;
 
 import com.gupaoedu.vip.IHelloService;
+import com.gupaoedu.vip.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -14,6 +15,10 @@ public class App {
 //
 //        iPaymentService.doPay();
         IHelloService helloService = rpcProxyClient.clientProxy(IHelloService.class, "localhost", 8080);
-        System.out.println(helloService.sayHello("fuckyou"));
+        System.out.println(helloService.sayHello("caonimabi"));
+        User user = new User();
+        user.setName("user");
+        user.setAge(18);
+        System.out.println(helloService.saveUser(user));
     }
 }
